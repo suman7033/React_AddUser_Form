@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{ useState } from 'react';
+import UserInput from './Components/UserItem/UserInput';
+import UserInputList from './Components/UserItem/UserInputList';
 
 function App() {
+
+  const [usersInputList, setUsersInputList] = useState([]);
+
+  const userInputHandler = (uName,uAge) => {
+    setUsersInputList((prevUsrList) => {
+      return[...prevUsrList, {name: uName, age: uAge, id : Math.random().toString()}]
+    })
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <UserInput onAddUser={userInputHandler} />
+      <UserInputList users={usersInputList} />
     </div>
   );
 }
